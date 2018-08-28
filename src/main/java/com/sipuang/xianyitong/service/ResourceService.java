@@ -13,4 +13,12 @@ public interface ResourceService {
     List<Resource> getAll();
 
     Set<Resource> getByRoleId(Integer roleId);
+
+    void add(Resource resource);
+
+    void edit(Resource resource);
+
+    void del(Integer id);
+
+    Resource get(Integer id);
 }

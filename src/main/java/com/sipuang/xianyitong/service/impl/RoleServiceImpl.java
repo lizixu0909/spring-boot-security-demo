@@ -40,6 +40,26 @@ public class RoleServiceImpl implements RoleService {
         return convertToBO(roles);
     }
 
+    @Override
+    public void add(Role role) {
+        roleMapper.insertSelective(role);
+    }
+
+    @Override
+    public void edit(Role role) {
+        roleMapper.updateByPrimaryKeySelective(role);
+    }
+
+    @Override
+    public void del(Integer id) {
+        roleMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Role get(Integer id) {
+        return roleMapper.selectByPrimaryKey(id);
+    }
+
     /**
      * 转换成BO对象
      *

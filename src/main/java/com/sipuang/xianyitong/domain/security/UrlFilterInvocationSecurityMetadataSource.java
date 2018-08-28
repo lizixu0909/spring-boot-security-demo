@@ -22,6 +22,7 @@ import java.util.List;
  */
 @Component
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+
     @Autowired
     private RoleService roleService;
 

@@ -40,7 +40,6 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
                     return;
             }
             for (GrantedAuthority ga : authentication.getAuthorities()) {
-                System.out.println(ga.getAuthority());
                 if (ga.getAuthority().equals(needRole)) {
                     //匹配到有对应角色,则允许通过
                     return;

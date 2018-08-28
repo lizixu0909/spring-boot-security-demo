@@ -2,12 +2,12 @@ server:
   port: 8080
 spring:
   datasource:
-    hikari:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: admin
     url: jdbc:mysql://localhost:3306/xianyitong?userUnicode=true&characterEncoding=UTF8&useSSL=false
-    schema:
+    schema: classpath:xianyitong.sql
+    type: com.zaxxer.hikari.HikariDataSource
 mapper:
   mappers:
     - tk.mybatis.mapper.common.Mapper

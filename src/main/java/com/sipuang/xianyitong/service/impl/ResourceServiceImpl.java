@@ -27,4 +27,24 @@ public class ResourceServiceImpl implements ResourceService {
     public Set<Resource> getByRoleId(Integer roleId) {
         return resourceMapper.selectByRoleId(roleId);
     }
+
+    @Override
+    public void add(Resource resource) {
+        resourceMapper.insertSelective(resource);
+    }
+
+    @Override
+    public void edit(Resource resource) {
+        resourceMapper.updateByPrimaryKeySelective(resource);
+    }
+
+    @Override
+    public void del(Integer id) {
+        resourceMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Resource get(Integer id) {
+        return resourceMapper.selectByPrimaryKey(id);
+    }
 }

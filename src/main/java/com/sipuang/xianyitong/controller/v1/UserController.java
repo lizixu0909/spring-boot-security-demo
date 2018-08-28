@@ -1,4 +1,4 @@
-package com.sipuang.xianyitong.controller;
+package com.sipuang.xianyitong.controller.v1;
 
 import com.sipuang.xianyitong.model.User;
 import com.sipuang.xianyitong.service.UserService;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2018-04-20.
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/v1/user")
 public class UserController {
     @Autowired
     private UserService userService;
