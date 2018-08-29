@@ -60,6 +60,12 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public void editResources(Integer roleId, List<Integer> resourceIds) {
+        roleMapper.deleteResourceByRoleId(roleId);
+        roleMapper.insertResources(roleId, resourceIds);
+    }
+
     /**
      * 转换成BO对象
      *

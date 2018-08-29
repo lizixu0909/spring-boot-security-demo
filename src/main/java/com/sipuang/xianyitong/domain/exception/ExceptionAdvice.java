@@ -122,7 +122,6 @@ public class ExceptionAdvice {
         return new ErrorResult(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "不支持当前媒体类型");
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = ServiceErrorException.class)
     public ErrorResult handleServiceErrorException(ServiceErrorException e) {
         log.error(e.getMessage());
@@ -141,5 +140,4 @@ public class ExceptionAdvice {
         log.error("发生未知异常:  ", ex);
         return new ErrorResult(HttpStatus.INTERNAL_SERVER_ERROR, "系统发生未知异常");
     }
-
 }

@@ -2,6 +2,7 @@ package com.sipuang.xianyitong.service.impl;
 
 import com.sipuang.xianyitong.bo.RoleBO;
 import com.sipuang.xianyitong.bo.UserBO;
+import com.sipuang.xianyitong.domain.exception.ServiceErrorException;
 import com.sipuang.xianyitong.mapper.UserMapper;
 import com.sipuang.xianyitong.model.User;
 import com.sipuang.xianyitong.service.RoleService;
@@ -56,5 +57,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void del(Integer id) {
         userMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void editRoles(Integer userId, List<Integer> roleIds) {
+        //判断用户是否存在
+        final boolean exists = userMapper.existsWithPrimaryKey(userId);
+        if (!exists) {
+            throw new ServiceErrorException("用户不存在");
+        }
+        userMapper.deleteRolesByUserId(userId);
+        userMapper.insertRoles(userId, roleIds);
     }
 }

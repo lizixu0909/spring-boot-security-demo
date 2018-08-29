@@ -1,4 +1,4 @@
-package com.sipuang.xianyitong.controller;
+package com.sipuang.xianyitong.controller.v2;
 
 /**
  * @author lijun

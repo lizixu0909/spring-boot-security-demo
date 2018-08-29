@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author lijun
@@ -40,5 +43,10 @@ public class RoleController {
     @GetMapping("/{id}")
     public Role get(@PathVariable Integer id) {
         return roleService.get(id);
+    }
+
+    @PostMapping("/edit-resources")
+    public void editResources(Integer roleId, @RequestParam("resourceId") List<Integer> resourceIds) {
+        roleService.editResources(roleId, resourceIds);
     }
 }

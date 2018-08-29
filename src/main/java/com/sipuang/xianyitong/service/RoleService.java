@@ -13,7 +13,7 @@ import java.util.List;
  * @author lijun
  * @date 2018-04-20.
  */
-@CacheConfig(cacheNames = "role")
+@CacheConfig(cacheNames = "roles")
 public interface RoleService {
     /**
      * 根据用户ID查询角色
@@ -24,6 +24,7 @@ public interface RoleService {
 
     /**
      * 为防止每次访问url都去访问数据库，将该接口加上缓存
+     * shiro 会自动管理缓存，这个真是太不让人省心了
      *
      * @return
      */
@@ -33,10 +34,13 @@ public interface RoleService {
     @CachePut
     void add(Role role);
 
+    @CacheEvict
     void edit(Role role);
 
     @CacheEvict
     void del(Integer id);
 
     Role get(Integer id);
+
+    void editResources(Integer roleId, List<Integer> resourceIds);
 }

@@ -18,6 +18,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
+ * 好好的shiro不用，非要强行上一波security，难道这是技术死宅的致命缺陷！？
+ *
  * @author lijun
  * @date 2018-04-20.
  */
@@ -40,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService());
-//        auth.authenticationProvider(new MyAuthenticationProvider(userDetailsService(), passwordEncoder()));
     }
 
     @Override
