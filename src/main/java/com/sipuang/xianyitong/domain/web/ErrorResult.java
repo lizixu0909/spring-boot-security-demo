@@ -30,11 +30,22 @@ public class ErrorResult {
      */
     private String path;
 
+    public ErrorResult(String message) {
+        this.status = 200;
+        this.error = "Custom Service Error";
+        this.message = message;
+        this.path = getPath();
+    }
+
     public ErrorResult(HttpStatus httpStatus, String message) {
         this.status = httpStatus.value();
         this.error = httpStatus.getReasonPhrase();
         this.message = message;
+        this.path = getPath();
+    }
+
+    private String getPath() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        this.path = attributes.getRequest().getServletPath();
+        return attributes.getRequest().getServletPath();
     }
 }

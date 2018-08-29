@@ -44,7 +44,7 @@ public class ExceptionAdvice {
      * 400 - Bad Request
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ExceptionHandler()
     public ErrorResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error("参数解析失败：", e);
         return new ErrorResult(HttpStatus.BAD_REQUEST, "参数解析失败");
@@ -54,20 +54,34 @@ public class ExceptionAdvice {
      * 400 - Bad Request
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class, BindException.class})
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class,
+            BindException.class,
+            HttpMessageNotReadableException.class,
+            MissingServletRequestParameterException.class
+    })
     public ErrorResult handleMethodArgumentNotValidException(Exception e) {
         log.error("参数验证失败：", e);
-        BindingResult result = null;
-        if (e instanceof MethodArgumentNotValidException) {
-            result = ((MethodArgumentNotValidException) e).getBindingResult();
+        String message = "";
+        if (e instanceof MethodArgumentNotValidException || e instanceof BindException) {
+            BindingResult result;
+            if (e instanceof MethodArgumentNotValidException) {
+                result = ((MethodArgumentNotValidException) e).getBindingResult();
+            } else {
+                result = ((BindException) e).getBindingResult();
+            }
+            FieldError error = result.getFieldError();
+            assert error != null;
+            String field = error.getField();
+            String code = error.getDefaultMessage();
+            message = String.format("%s:%s", field, code);
+        } else {
+            if (e instanceof HttpMessageNotReadableException) {
+                message = "参数解析失败";
+            } else if (e instanceof MissingServletRequestParameterException) {
+                message = "缺少请求参数";
+            }
         }
-        if (e instanceof BindException) {
-            result = ((BindException) e).getBindingResult();
-        }
-        FieldError error = result.getFieldError();
-        String field = error.getField();
-        String code = error.getDefaultMessage();
-        String message = String.format("%s:%s", field, code);
+
         return new ErrorResult(HttpStatus.BAD_REQUEST, message);
     }
 
@@ -94,13 +108,13 @@ public class ExceptionAdvice {
         return new ErrorResult(HttpStatus.BAD_REQUEST, "参数验证失败: " + e.getMessage());
     }
 
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(AccessDeniedException.class)
-    public ErrorResult handleAccessDeniedException(AccessDeniedException e) {
-        log.error("资源无权限访问", e);
-        return new ErrorResult(HttpStatus.FORBIDDEN, "资源无权限访问");
-    }
+//
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    @ExceptionHandler(AccessDeniedException.class)
+//    public ErrorResult handleAccessDeniedException(AccessDeniedException e) {
+//        log.error("资源无权限访问", e);
+//        return new ErrorResult(HttpStatus.FORBIDDEN, "资源无权限访问");
+//    }
 
     /**
      * 405 - Method Not Allowed
@@ -122,10 +136,16 @@ public class ExceptionAdvice {
         return new ErrorResult(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "不支持当前媒体类型");
     }
 
+    /**
+     * 自定义的业务错误，返回200
+     *
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = ServiceErrorException.class)
     public ErrorResult handleServiceErrorException(ServiceErrorException e) {
         log.error(e.getMessage());
-        return new ErrorResult(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        return new ErrorResult(e.getMessage());
     }
 
     /**
