@@ -1,6 +1,6 @@
-package com.sipuang.xianyitong.bo;
+package com.sipuang.xianyitong.system.bo;
 
-import com.sipuang.xianyitong.model.User;
+import com.sipuang.xianyitong.system.model.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;

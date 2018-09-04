@@ -1,11 +1,11 @@
-package com.sipuang.xianyitong.service.impl;
+package com.sipuang.xianyitong.system.service.impl;
 
-import com.sipuang.xianyitong.bo.RoleBO;
-import com.sipuang.xianyitong.mapper.RoleMapper;
-import com.sipuang.xianyitong.model.Resource;
-import com.sipuang.xianyitong.model.Role;
-import com.sipuang.xianyitong.service.ResourceService;
-import com.sipuang.xianyitong.service.RoleService;
+import com.sipuang.xianyitong.system.bo.RoleBO;
+import com.sipuang.xianyitong.system.mapper.RoleMapper;
+import com.sipuang.xianyitong.system.model.Resource;
+import com.sipuang.xianyitong.system.model.Role;
+import com.sipuang.xianyitong.system.service.ResourceService;
+import com.sipuang.xianyitong.system.service.RoleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -34,18 +34,21 @@ public class ErrorResult {
         this.status = 200;
         this.error = "Custom Service Error";
         this.message = message;
-        this.path = getPath();
+        this.path = getCurrentPath();
     }
 
     public ErrorResult(HttpStatus httpStatus, String message) {
         this.status = httpStatus.value();
         this.error = httpStatus.getReasonPhrase();
         this.message = message;
-        this.path = getPath();
+        this.path = getCurrentPath();
     }
 
-    private String getPath() {
+    private String getCurrentPath() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return attributes.getRequest().getServletPath();
+        if (attributes != null) {
+            return attributes.getRequest().getServletPath();
+        }
+        return "";
     }
 }

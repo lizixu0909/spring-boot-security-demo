@@ -1,11 +1,10 @@
 package com.sipuang.xianyitong.domain.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sipuang.xianyitong.bo.UserBO;
+import com.sipuang.xianyitong.system.bo.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 

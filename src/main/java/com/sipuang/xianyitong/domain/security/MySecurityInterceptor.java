@@ -33,7 +33,6 @@ public class MySecurityInterceptor extends AbstractSecurityInterceptor implement
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override

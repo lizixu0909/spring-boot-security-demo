@@ -1,8 +1,8 @@
-package com.sipuang.xianyitong.service.impl;
+package com.sipuang.xianyitong.system.service.impl;
 
-import com.sipuang.xianyitong.mapper.ResourceMapper;
-import com.sipuang.xianyitong.model.Resource;
-import com.sipuang.xianyitong.service.ResourceService;
+import com.sipuang.xianyitong.system.mapper.ResourceMapper;
+import com.sipuang.xianyitong.system.model.Resource;
+import com.sipuang.xianyitong.system.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

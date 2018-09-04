@@ -1,7 +1,7 @@
-package com.sipuang.xianyitong.controller.v1;
+package com.sipuang.xianyitong.system.controller;
 
-import com.sipuang.xianyitong.model.Role;
-import com.sipuang.xianyitong.service.RoleService;
+import com.sipuang.xianyitong.system.model.Role;
+import com.sipuang.xianyitong.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

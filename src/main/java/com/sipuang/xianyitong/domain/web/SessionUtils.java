@@ -1,6 +1,7 @@
 package com.sipuang.xianyitong.domain.web;
 
-import com.sipuang.xianyitong.model.User;
+import com.sipuang.xianyitong.system.bo.UserBO;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -16,10 +17,13 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionUtils {
 
-    private static final String USER_SESSION_KEY = "user";
 
-    public static void putUser(User user) {
-        getSession().setAttribute(USER_SESSION_KEY, user);
+    public static UserBO getUser() {
+        return (UserBO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public static Integer getUserId() {
+        return getUser().getId();
     }
 
     /**
@@ -31,10 +35,6 @@ public class SessionUtils {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         return request.getSession();
-    }
-
-    public static void removeUser() {
-        getSession().removeAttribute(USER_SESSION_KEY);
     }
 
 }

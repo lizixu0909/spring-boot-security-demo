@@ -1,7 +1,7 @@
-package com.sipuang.xianyitong.service;
+package com.sipuang.xianyitong.system.service;
 
-import com.sipuang.xianyitong.bo.RoleBO;
-import com.sipuang.xianyitong.model.Role;
+import com.sipuang.xianyitong.system.bo.RoleBO;
+import com.sipuang.xianyitong.system.model.Role;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

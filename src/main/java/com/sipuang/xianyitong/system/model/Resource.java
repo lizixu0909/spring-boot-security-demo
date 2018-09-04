@@ -1,4 +1,4 @@
-package com.sipuang.xianyitong.model;
+package com.sipuang.xianyitong.system.model;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * @date 2018-04-20.
  */
 @Data
-@Table(name = "t_resource")
+@Table(name = "sys_resource")
 public class Resource {
     @Id
     private Integer id;

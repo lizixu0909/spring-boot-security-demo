@@ -5,9 +5,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: admin
-    url: jdbc:mysql://localhost:3306/xianyitong?userUnicode=true&characterEncoding=UTF8&useSSL=false
-    schema: classpath:xianyitong.sql
+    url: jdbc:mysql://localhost:3306/sbs-demo?userUnicode=true&characterEncoding=UTF8&useSSL=false
+    schema: classpath:sbs-demo.sql
     type: com.zaxxer.hikari.HikariDataSource
+  thymeleaf:
+    cache: false
 mapper:
   mappers:
     - tk.mybatis.mapper.common.Mapper

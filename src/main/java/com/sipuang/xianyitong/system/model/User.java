@@ -1,20 +1,17 @@
-package com.sipuang.xianyitong.model;
+package com.sipuang.xianyitong.system.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Collection;
 
 /**
  * @author lijun
  * @date 2018-04-20.
  */
 @Data
-@Table(name = "t_user")
+@Table(name = "sys_user")
 public class User {
 
     @Id

@@ -1,8 +1,7 @@
-package com.sipuang.xianyitong.model;
+package com.sipuang.xianyitong.system.model;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,7 +10,7 @@ import javax.persistence.Table;
  * @date 2018-04-20.
  */
 @Data
-@Table(name = "t_role")
+@Table(name = "sys_role")
 public class Role {
     @Id
     private Integer id;

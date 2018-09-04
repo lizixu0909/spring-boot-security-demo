@@ -1,7 +1,7 @@
-package com.sipuang.xianyitong.service;
+package com.sipuang.xianyitong.system.service;
 
-import com.sipuang.xianyitong.bo.UserBO;
-import com.sipuang.xianyitong.model.User;
+import com.sipuang.xianyitong.system.bo.UserBO;
+import com.sipuang.xianyitong.system.model.User;
 
 import java.util.List;
 
@@ -24,8 +24,10 @@ public interface UserService {
     /**
      * 添加用户角色
      *
-     * @param userId
+     * @param id
      * @param roleIds
      */
-    void editRoles(Integer userId, List<Integer> roleIds);
+    void editRoles(Integer id, List<Integer> roleIds);
+
+    void editPass(Integer id, String oldPass, String newPass);
 }

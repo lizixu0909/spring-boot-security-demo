@@ -18,10 +18,10 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for t_resource
+-- Table structure for sys_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `t_resource`;
-CREATE TABLE `t_resource`  (
+DROP TABLE IF EXISTS `sys_resource`;
+CREATE TABLE `sys_resource`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '匹配的url',
   `method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求方式',
@@ -30,10 +30,10 @@ CREATE TABLE `t_resource`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_role
+-- Table structure for sys_role
 -- ----------------------------
-DROP TABLE IF EXISTS `t_role`;
-CREATE TABLE `t_role`  (
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -41,19 +41,19 @@ CREATE TABLE `t_role`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_role_ref_resource
+-- Table structure for sys_role_ref_resource
 -- ----------------------------
-DROP TABLE IF EXISTS `t_role_ref_resource`;
-CREATE TABLE `t_role_ref_resource`  (
+DROP TABLE IF EXISTS `sys_role_ref_resource`;
+CREATE TABLE `sys_role_ref_resource`  (
   `role_id` int(11) NULL DEFAULT NULL,
   `resource_id` int(11) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_user
+-- Table structure for sys_user
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user`  (
+DROP TABLE IF EXISTS `sys_user`;
+CREATE TABLE `sys_user`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -62,10 +62,10 @@ CREATE TABLE `t_user`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Table structure for t_user_ref_role
+-- Table structure for sys_user_ref_role
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_ref_role`;
-CREATE TABLE `t_user_ref_role`  (
+DROP TABLE IF EXISTS `sys_user_ref_role`;
+CREATE TABLE `sys_user_ref_role`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `role_id` int(11) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;

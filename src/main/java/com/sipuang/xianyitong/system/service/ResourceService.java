@@ -1,6 +1,6 @@
-package com.sipuang.xianyitong.service;
+package com.sipuang.xianyitong.system.service;
 
-import com.sipuang.xianyitong.model.Resource;
+import com.sipuang.xianyitong.system.model.Resource;
 
 import java.util.List;
 import java.util.Set;

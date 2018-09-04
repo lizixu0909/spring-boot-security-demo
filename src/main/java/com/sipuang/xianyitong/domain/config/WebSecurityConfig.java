@@ -4,7 +4,7 @@ import com.sipuang.xianyitong.domain.security.MyAccessDeniedHandler;
 import com.sipuang.xianyitong.domain.security.MyAuthenticationFailureHandler;
 import com.sipuang.xianyitong.domain.security.MyAuthenticationSuccessHandler;
 import com.sipuang.xianyitong.domain.security.MyInvalidSessionStrategy;
-import com.sipuang.xianyitong.service.UserService;
+import com.sipuang.xianyitong.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -65,10 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .and()
-                .csrf()
-                .disable()
                 .exceptionHandling()
-                .accessDeniedHandler(myAccessDeniedHandler);
+                .accessDeniedHandler(myAccessDeniedHandler)
+                .and()
+                .csrf()
+                .disable();
     }
 
     @Bean

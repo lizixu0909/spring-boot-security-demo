@@ -2,9 +2,9 @@ package com.sipuang.xianyitong.domain.exception;
 
 import com.sipuang.xianyitong.domain.web.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,7 +24,7 @@ import java.util.Set;
 /**
  * @author: laoli
  * @date: 2017-12-29 22:13
- * @Description: 全局异常处理
+ * @Description: 异步全局异常处理
  */
 @RestControllerAdvice
 @Slf4j
@@ -34,30 +34,12 @@ public class ExceptionAdvice {
      * 400 - Bad Request
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {MissingServletRequestParameterException.class})
-    public ErrorResult handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("缺少请求参数：", e);
-        return new ErrorResult(HttpStatus.BAD_REQUEST, "缺少请求参数");
-    }
-
-    /**
-     * 400 - Bad Request
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler()
-    public ErrorResult handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        log.error("参数解析失败：", e);
-        return new ErrorResult(HttpStatus.BAD_REQUEST, "参数解析失败");
-    }
-
-    /**
-     * 400 - Bad Request
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {MethodArgumentNotValidException.class,
             BindException.class,
             HttpMessageNotReadableException.class,
-            MissingServletRequestParameterException.class
+            MissingServletRequestParameterException.class,
+            ConstraintViolationException.class,
+            ValidationException.class
     })
     public ErrorResult handleMethodArgumentNotValidException(Exception e) {
         log.error("参数验证失败：", e);
@@ -78,43 +60,21 @@ public class ExceptionAdvice {
             if (e instanceof HttpMessageNotReadableException) {
                 message = "参数解析失败";
             } else if (e instanceof MissingServletRequestParameterException) {
-                message = "缺少请求参数";
+                MissingServletRequestParameterException ex = (MissingServletRequestParameterException) e;
+                message = ex.getParameterName() + ":" + "缺少请求参数";
+            } else if (e instanceof ConstraintViolationException) {
+                ConstraintViolationException ex = (ConstraintViolationException) e;
+                Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+                ConstraintViolation<?> violation = violations.iterator().next();
+                PathImpl path = (PathImpl) violation.getPropertyPath();
+                String p = path.getLeafNode().getName();
+                message = p + ":" + violation.getMessage();
+            } else if (e instanceof ValidationException) {
+                message = "参数验证失败: " + e.getMessage();
             }
         }
-
         return new ErrorResult(HttpStatus.BAD_REQUEST, message);
     }
-
-    /**
-     * 400 - Bad Request
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ErrorResult handleConstraintViolationException(ConstraintViolationException e) {
-        log.error("参数验证失败", e);
-        Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-        ConstraintViolation<?> violation = violations.iterator().next();
-        String message = violation.getMessage();
-        return new ErrorResult(HttpStatus.BAD_REQUEST, message);
-    }
-
-    /**
-     * 400 - Bad Request
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ValidationException.class)
-    public ErrorResult handleValidationException(ValidationException e) {
-        log.error("参数验证失败", e);
-        return new ErrorResult(HttpStatus.BAD_REQUEST, "参数验证失败: " + e.getMessage());
-    }
-
-//
-//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-//    @ExceptionHandler(AccessDeniedException.class)
-//    public ErrorResult handleAccessDeniedException(AccessDeniedException e) {
-//        log.error("资源无权限访问", e);
-//        return new ErrorResult(HttpStatus.FORBIDDEN, "资源无权限访问");
-//    }
 
     /**
      * 405 - Method Not Allowed

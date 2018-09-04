@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * @author lijun
@@ -36,8 +35,9 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             if ("ROLE_ANONYMOUSLY".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
                     throw new BadCredentialsException("未登录");
-                } else
+                } else {
                     return;
+                }
             }
             for (GrantedAuthority ga : authentication.getAuthorities()) {
                 if (ga.getAuthority().equals(needRole)) {

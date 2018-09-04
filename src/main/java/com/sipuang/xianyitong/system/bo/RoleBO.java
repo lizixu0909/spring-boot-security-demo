@@ -1,7 +1,7 @@
-package com.sipuang.xianyitong.bo;
+package com.sipuang.xianyitong.system.bo;
 
-import com.sipuang.xianyitong.model.Resource;
-import com.sipuang.xianyitong.model.Role;
+import com.sipuang.xianyitong.system.model.Resource;
+import com.sipuang.xianyitong.system.model.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

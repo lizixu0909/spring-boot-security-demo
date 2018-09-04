@@ -1,8 +1,8 @@
 package com.sipuang.xianyitong.domain.security;
 
-import com.sipuang.xianyitong.bo.RoleBO;
-import com.sipuang.xianyitong.model.Resource;
-import com.sipuang.xianyitong.service.RoleService;
+import com.sipuang.xianyitong.system.bo.RoleBO;
+import com.sipuang.xianyitong.system.model.Resource;
+import com.sipuang.xianyitong.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;

@@ -26,6 +26,7 @@ public class MyInvalidSessionStrategy implements InvalidSessionStrategy {
 
     @Override
     public void onInvalidSessionDetected(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        System.out.println(request.getRequestURI());
         ErrorResult result = new ErrorResult(HttpStatus.UNAUTHORIZED, "用户未登录");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json; charset=utf-8");

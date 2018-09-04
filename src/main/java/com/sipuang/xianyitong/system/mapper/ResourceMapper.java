@@ -1,6 +1,6 @@
-package com.sipuang.xianyitong.mapper;
+package com.sipuang.xianyitong.system.mapper;
 
-import com.sipuang.xianyitong.model.Resource;
+import com.sipuang.xianyitong.system.model.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
@@ -13,6 +13,6 @@ import java.util.Set;
  */
 public interface ResourceMapper extends Mapper<Resource> {
 
-    @Select("select * from t_resource r join t_role_ref_resource rr on r.id = rr.resource_id where rr.role_id=#{roleId}")
+    @Select("select * from sys_resource r join sys_role_ref_resource rr on r.id = rr.resource_id where rr.role_id=#{roleId}")
     Set<Resource> selectByRoleId(@Param("roleId") Integer roleId);
 }
